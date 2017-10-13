@@ -26,7 +26,9 @@ namespace MediaCenter.Hosting
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            MinimizeToTray.Enable(this);
+
             ripDVDService = new RipDVDService();
             coverMediaService = new ConvertMediaServices();
             dvdTrayService = new DVDTrayService();
@@ -57,9 +59,9 @@ namespace MediaCenter.Hosting
                 }
             }
 
-            if (Addresses.Count() == 1)
+            if (cbListIp.Items.Count == 1)
             {
-                RunServer(Addresses[0].ToString());
+                cbListIp.SelectedItem = cbListIp.Items[0];
             }
         }
 
@@ -87,25 +89,44 @@ namespace MediaCenter.Hosting
 
         private void RunServer(string address)
         {
-            if (app != null)
+            try
             {
-                app.Dispose();
-                tbIsOnline.Text = "Offline";
-            }
+                if (app != null)
+                {
+                    app.Dispose();
+                    tbIsOnline.Text = "Offline";
+                }
 
-            app = WebApp.Start<Startup>(url: "http://" + address + ":9191");
-            if (app != null)
+                app = WebApp.Start<Startup>(url: "http://" + address + ":9191");
+                if (app != null)
+                {
+                    tbIsOnline.Text = "Online";
+                }
+            }
+            catch(Exception exp)
             {
-                tbIsOnline.Text = "Online";
+                if (exp.InnerException != null)
+                {
+                    MessageBox.Show(exp.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(exp.Message);
+                }
+                Application.Current.Shutdown();
             }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (app != null)
-            {
-                app.Dispose();
-            }
+            
+            this.WindowState = System.Windows.WindowState.Minimized;
+            e.Cancel = true;
+
+            //if (app != null)
+            //{
+            //    app.Dispose();
+            //}
         }
 
         private void cbListIp_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -186,7 +207,6 @@ namespace MediaCenter.Hosting
             progressWindow.AddToOutput("Disc copied to local drive");
 
             // convert all mkv to mp4
-
             coverMediaService.Convert(@"C:\MediaStreamer\Content\Queue\" + movieName.DiscName);
         }
 
@@ -198,6 +218,11 @@ namespace MediaCenter.Hosting
         private void RipDVDService_Progress(string output)
         {
             progressWindow.AddToOutput(output);
+        }
+
+        private void btnCloseApplication_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

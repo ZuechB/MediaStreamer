@@ -1,4 +1,4 @@
-﻿using MediaCenter.Models;
+﻿using MediaCenter.Hosting.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Web;

@@ -1,4 +1,4 @@
-﻿namespace MediaCenter.Models
+﻿namespace MediaCenter.Hosting.Models
 {
     public class Video
     {

@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaCenter.Hosting"
         mc:Ignorable="d"
-        Title="Media Center Extention" Height="129.311" Width="287.047" Loaded="Window_Loaded" Closing="Window_Closing" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Media Center Extention" Height="266.841" Width="287.047" Loaded="Window_Loaded" Closing="Window_Closing" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock x:Name="tbIsOnline" Margin="12,10,10,0" TextWrapping="Wrap" Text="Offline" VerticalAlignment="Top" TextAlignment="Center"/>
         <ComboBox x:Name="cbListIp" Margin="12,55,10,0" VerticalAlignment="Top" SelectionChanged="cbListIp_SelectionChanged"/>
         <TextBlock x:Name="tbIsOnline_Copy" Margin="10,36,12,0" TextWrapping="Wrap" Text="Select the address for your machine" VerticalAlignment="Top" TextAlignment="Center" FontSize="10"/>
+        <Button x:Name="btnCloseApplication" Content="Close Application" HorizontalAlignment="Left" Margin="12,208,0,0" VerticalAlignment="Top" Width="259" Click="btnCloseApplication_Click"/>
     </Grid>
 </Window>

@@ -57,6 +57,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -68,6 +69,7 @@
     <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -87,8 +89,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MediaController.cs" />
+    <Compile Include="Models\Video.cs" />
     <Compile Include="Services\ConvertMediaServices.cs" />
     <Compile Include="Services\DVDTrayService.cs" />
+    <Compile Include="Services\MinimizeToTray.cs" />
     <Compile Include="Services\RipDVDService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Windows\NameOfMovie.xaml.cs">
@@ -194,16 +198,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MediaCenter.Models\MediaCenter.Models.csproj">
-      <Project>{357c70ea-44eb-4b12-9558-c84af1964b97}</Project>
-      <Name>MediaCenter.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Content\DVDs\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MinimizeToTrayDemo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ThirdParty\ffmpeg\ffmpeg.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
